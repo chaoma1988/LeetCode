@@ -1,0 +1,52 @@
+class Solution {
+public:
+    
+    void helper(TreeNode* root, vector<int>& temp)
+    {
+        if(root==nullptr)
+        {    
+            return;
+        }
+        else
+        {
+            temp.push_back(root->val);
+            helper(root->left, temp);
+            helper(root->right, temp);        
+        }
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        
+        vector<int> preorder;
+        helper(root, preorder);
+        return preorder;
+        
+    }
+};
+
+
+class Solution {
+public:
+    
+    vector<int> preorderTraversal(TreeNode* root) {
+    
+        vector<int> preorder;
+        if(root==nullptr)
+        {
+            return {};
+        }
+    
+        vector<int> lefttrees = preorderTraversal(root->left);
+        vector<int> righttrees = preorderTraversal(root->right);
+        
+        preorder.push_back(root->val);
+        
+        preorder.insert(preorder.end(), lefttrees.begin(), lefttrees.end());
+        
+        preorder.insert(preorder.end(), righttrees.begin(), righttrees.end());
+        
+        return preorder;
+        
+
+    }
+
+};
