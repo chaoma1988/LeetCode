@@ -1,0 +1,35 @@
+class Solution {
+public:
+    /**
+     * @param root: the root of binary tree
+     * @return: the root of the minimum subtree
+     */
+    int sum = INT_MAX;
+    
+    TreeNode* result = nullptr;
+    TreeNode * findSubtree(TreeNode * root) {
+    
+        helper(root);
+        
+        return result;
+        
+    }
+    
+    int helper(TreeNode* root)
+    {
+        if(root==nullptr)
+            return 0;
+            
+        int left  = helper(root->right);
+        int right = helper(root->left);
+        
+        if(left+right+root->val<sum)
+        {
+            sum = left+right+root->val;
+            result = root;
+        }
+        return left+right+root->val;
+    }
+    
+    
+};
